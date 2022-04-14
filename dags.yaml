@@ -704,3 +704,33 @@ bqetl_cjms_nonprod:
     retry_delay: 5m
   tags:
     - impact/tier_3
+
+bqetl_acoustic_contact_export:
+  schedule_interval: manual
+  description: |
+    Processing data loaded by
+    fivetran_acoustic_contact_export
+    DAG to prepare it for Looker.
+  default_args:
+    owner: kignasiak@mozilla.com
+    start_date: "2021-01-01"  # TODO: should be the same as the DAG, still TBD
+    email: ["telemetry-alerts@mozilla.com", "kignasiak@mozilla.com"]
+    retries: 2
+    retry_delay: 5m
+  tags:
+    - impact/tier_3
+
+bqetl_acoustic_raw_recipient_export:
+  schedule_interval: manual
+  description: |
+    Processing data loaded by
+    fivetran_acoustic_raw_recipient_export
+    DAG to prepare it for Looker.
+  default_args:
+    owner: kignasiak@mozilla.com
+    start_date: "2022-01-01"  # TODO: should be the same as the DAG, still TBD
+    email: ["telemetry-alerts@mozilla.com", "kignasiak@mozilla.com"]
+    retries: 2
+    retry_delay: 5m
+  tags:
+    - impact/tier_3

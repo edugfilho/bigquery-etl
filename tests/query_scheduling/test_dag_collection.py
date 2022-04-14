@@ -267,6 +267,62 @@ class TestDagCollection:
         expected = (TEST_DIR / "data" / "dags" / "simple_test_dag").read_text().strip()
         assert result == expected
 
+    @pytest.mark.java
+    def test_to_airflow_manual_schedule(self, tmp_path):
+        query_file = (
+            TEST_DIR
+            / "data"
+            / "test_sql"
+            / "moz-fx-data-test-project"
+            / "test"
+            / "non_incremental_query_v1"
+            / "query.sql"
+        )
+
+        metadata = Metadata(
+            "test",
+            "test",
+            ["test@example.com"],
+            {},
+            {
+                "dag_name": "bqetl_test_dag",
+                "depends_on_past": True,
+                "param": "test_param",
+                "arguments": ["--append_table"],
+                "depends_on_fivetran": [
+                    {"task_id": "fivetran_import_1"},
+                    {"task_id": "fivetran_import_2"},
+                ],
+            },
+        )
+
+        tasks = [Task.of_query(query_file, metadata)]
+
+        default_args = {
+            "depends_on_past": False,
+            "owner": "test@example.org",
+            "email": ["test@example.org"],
+            "start_date": "2020-01-01",
+            "retry_delay": "1h",
+        }
+        dags = DagCollection.from_dict(
+            {
+                "bqetl_test_dag": {
+                    "schedule_interval": "manual",
+                    "default_args": default_args,
+                }
+            }
+        ).with_tasks(tasks)
+
+        dags.to_airflow_dags(tmp_path)
+        result = (tmp_path / "bqetl_test_dag.py").read_text().strip()
+        expected = (
+            (TEST_DIR / "data" / "dags" / "simple_test_dag_manual_schedule")
+            .read_text()
+            .strip()
+        )
+        assert result == expected
+
     def test_python_script_to_airflow(self, tmp_path):
         query_file = (
             TEST_DIR

@@ -220,6 +220,12 @@ class Dag:
                 f"file. Does it appear under `scheduling` in any metadata.yaml files?"
             )
 
+        # overwriting schedule interval to be None if defined as "manual"
+        schedule_interval = args["schedule_interval"]
+        args["schedule_interval"] = (
+            None if schedule_interval.lower() == "manual" else schedule_interval
+        )
+
         for task in args["tasks"]:
             task.with_dependencies(dag_collection)
 
