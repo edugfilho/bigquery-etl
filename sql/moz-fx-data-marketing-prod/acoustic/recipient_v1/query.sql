@@ -4,6 +4,8 @@ BEGIN
     recipient_id,  -- no nulls  // int
     report_id,  -- no nulls  // int
     mailing_id,  -- no null // int
+    campaign_id,
+    content_id,
     PARSE_DATETIME(
       "%m/%d/%Y %H:%M:%S",
       event_timestamp
@@ -20,6 +22,13 @@ BEGIN
     LOWER(
       COALESCE(NULLIF(click_name, ''), "unknown")
     ) AS click_name,  -- 9075718 nulls // string
+    -- LOWER(
+    --   COALESCE(NULLIF(conversion_action, ''), "unknown")
+    -- ) AS conversion_action,
+    -- LOWER(
+    --   COALESCE(NULLIF(conversion_detail, ''), "unknown")
+    -- ) AS conversion_detail,
+    -- NULLIF(conversion_amount, '') AS conversion_amount,  -- conversion fields seem to be always empty
     COALESCE(
       NULLIF(url, ''),
       "unknown"

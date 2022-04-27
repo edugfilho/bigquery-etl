@@ -24,6 +24,16 @@ fields:
   description: The ID of the Sent email associated with the event.
 
 - mode: NULLABLE
+  name: campaign_id
+  type: INTEGER
+  description: The ID of the campaign associated with the event.
+
+- mode: NULLABLE
+  name: content_id
+  type: INTEGER
+  description: The ID of the content associated with the event.
+
+- mode: NULLABLE
   name: event_timestamp
   type: DATETIME
   description: The date and time of the event in the API user’s time zone.
@@ -47,6 +57,18 @@ fields:
   name: click_name
   type: STRING
   description: The user-specified name of the link or Clickstream.
+
+# - mode: NULLABLE
+#   name: conversion_action
+#   type: STRING
+
+# - mode: NULLABLE
+#   name: conversion_detail
+#   type: STRING
+
+# - mode: NULLABLE
+#   name: conversion_amount
+#   type: FLOAT
 
 - mode: NULLABLE
   name: url

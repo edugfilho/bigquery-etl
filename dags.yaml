@@ -713,7 +713,7 @@ bqetl_acoustic_contact_export:
     DAG to prepare it for Looker.
   default_args:
     owner: kignasiak@mozilla.com
-    start_date: "2021-01-01"  # TODO: should be the same as the DAG, still TBD
+    start_date: "2021-03-01"  # TODO: should be the same as the DAG, still TBD
     email: ["telemetry-alerts@mozilla.com", "kignasiak@mozilla.com"]
     retries: 2
     retry_delay: 5m
@@ -728,7 +728,7 @@ bqetl_acoustic_raw_recipient_export:
     DAG to prepare it for Looker.
   default_args:
     owner: kignasiak@mozilla.com
-    start_date: "2022-01-01"  # TODO: should be the same as the DAG, still TBD
+    start_date: "2022-03-01"  # TODO: should be the same as the DAG, still TBD
     email: ["telemetry-alerts@mozilla.com", "kignasiak@mozilla.com"]
     retries: 2
     retry_delay: 5m

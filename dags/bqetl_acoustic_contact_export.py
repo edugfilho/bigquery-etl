@@ -24,7 +24,7 @@ kignasiak@mozilla.com
 
 default_args = {
     "owner": "kignasiak@mozilla.com",
-    "start_date": datetime.datetime(2021, 1, 1, 0, 0),
+    "start_date": datetime.datetime(2021, 3, 1, 0, 0),
     "end_date": None,
     "email": ["telemetry-alerts@mozilla.com", "kignasiak@mozilla.com"],
     "depends_on_past": False,
